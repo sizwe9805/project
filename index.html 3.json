@@ -1,0 +1,663 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taurus Couriers | Premium Courier Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1E3888;      /* Blue */
+            --secondary: #F94144;    /* Red */
+            --accent: #0033A0;       /* Deep Blue */
+            --light: #F9F9F9;
+            --dark: #22223B;
+            --success: #43AA8B;
+            --danger: #F94144;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        section { padding: 80px 0; }
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        img { max-width: 100%; height: auto; }
+        header { background: white; box-shadow: var(--shadow); position: fixed; width: 100%; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo { display: flex; align-items: center; }
+        .logo img { height: 54px; margin-right: 14px; }
+        .logo-text h1 { color: var(--primary); font-size: 1.8rem; }
+        .logo-text span { color: var(--secondary); }
+        .logo-text p { font-size: 0.7rem; color: #718096; margin-top: -3px; }
+        .hero {
+            background: linear-gradient(rgba(30, 56, 136, 0.85), rgba(249, 65, 68, 0.85)), 
+                        url('https://images.unsplash.com/photo-1605656816944-971cd5c140af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+        .hero h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
+        .booking-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
+        .form-title { text-align: center; margin-bottom: 30px; }
+        .form-title h2 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+        .form-title p { color: #718096; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark); }
+        input, select, textarea {
+            width: 100%; padding: 12px 15px; border: 1px solid #E2E8F0;
+            border-radius: 6px; font-size: 1rem; transition: var(--transition);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(30, 56, 136, 0.15);
+        }
+        .service-options {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;
+        }
+        .service-option {
+            border: 1px solid #E2E8F0; border-radius: 8px; padding: 15px;
+            cursor: pointer; transition: var(--transition);
+        }
+        .service-option:hover { border-color: var(--accent); }
+        .service-option.selected {
+            border-color: var(--secondary);
+            background-color: rgba(249, 65, 68, 0.08);
+        }
+        .service-option input { display: none; }
+        .service-icon { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
+        .service-name { font-weight: 600; margin-bottom: 5px; }
+        .service-price { color: var(--secondary); font-weight: 700; }
+        .calculator-result {
+            background-color: #F7FAFC;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .result-placeholder { color: #718096; }
+        .result-display { display: none; }
+        .rate-amount {
+            font-size: 2.5rem; color: var(--secondary); font-weight: 700;
+            margin: 10px 0;
+        }
+        .referral-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+        .referral-content { flex: 2; }
+        .referral-code {
+            flex: 1;
+            background: white;
+            color: var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .features-section { background-color: #F7FAFC; }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-icon { font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px; }
+        .testimonials-section {
+            background: linear-gradient(rgba(30, 56, 136, 0.9), rgba(249, 65, 68, 0.9)), 
+                        url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .testimonial-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: left;
+            color: #fff;
+        }
+        .testimonial-card .fa-quote-left {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .testimonial-author {
+            margin-top: 15px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+        .about-cards {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .about-card {
+            background:#F7FAFC;
+            padding:24px 32px;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.04);
+            max-width:340px;
+        }
+        .about-card h3 {
+            color:var(--primary);
+            margin-bottom:10px;
+        }
+        .local-services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0 0 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .local-services-table th,
+        .local-services-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .local-services-table th {
+            background: var(--primary);
+            color: white;
+        }
+        .local-services-table tr:nth-child(even) {
+            background: #F7FAFC;
+        }
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo img { height: 40px; margin-bottom: 15px; }
+        .footer-links h3 { margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links a { color: #CBD5E0; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #A0AEC0;
+            font-size: 0.9rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        .btn-primary { background-color: var(--secondary); color: white; }
+        .btn-primary:hover { background-color: #c82333; transform: translateY(-2px); }
+        .btn-secondary { background-color: var(--primary); color: white; }
+        .btn-secondary:hover { background-color: #0033A0; transform: translateY(-2px); }
+        @media (max-width: 1024px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .service-options { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; text-align: center; }
+            .logo { margin-bottom: 15px; }
+            .hero { padding: 150px 0 80px; }
+            .hero h2 { font-size: 2.2rem; }
+            .referral-section { flex-direction: column; text-align: center; }
+            .referral-code { margin-top: 20px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated { animation: fadeIn 0.6s ease forwards; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://svgshare.com/i/15wC.svg" alt="Taurus Couriers Logo">
+                <div class="logo-text">
+                    <h1>Taurus<span>Couriers</span></h1>
+                    <p>Premium Courier Services</p>
+                </div>
+            </div>
+            <nav>
+                <a href="tel:+27655587885" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> +27 655 587885
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="container">
+            <h2>Fast, Reliable Courier Services</h2>
+            <p>Delivering your packages with speed and care across South Africa. 30% cheaper than competitors with our price match guarantee!</p>
+            <a href="#book-now" class="btn btn-primary">Book Now</a>
+            <a href="#local-services" class="btn btn-secondary">View Local Services</a>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT US SECTION ===== -->
+    <section id="about-us" class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;">About Taurus Couriers</h2>
+            <p style="max-width:700px;margin:0 auto 30px;text-align:center;">
+                <b>Taurus Couriers</b> is a proudly South African courier company dedicated to providing fast, reliable, and affordable delivery solutions for individuals and businesses nationwide. 
+                <br><br>
+                Our passionate team of drivers and logistics experts ensures your parcels are delivered safely and on time, every time. We use the latest technology for real-time tracking, transparent pricing, and seamless customer support. Whether you need urgent same-day delivery or cost-effective economy shipping, Taurus Couriers is your trusted partner for all your courier needs.
+            </p>
+            <div class="about-cards">
+                <div class="about-card">
+                    <h3><i class="fas fa-users"></i> Our Mission</h3>
+                    <p>To connect South Africa with reliable, affordable, and friendly courier services that empower businesses and delight customers.</p>
+                </div>
+                <div class="about-card">
+                    <h3><i class="fas fa-handshake"></i> Our Promise</h3>
+                    <p>We treat every parcel as if it’s our own, and every customer as a VIP. Your satisfaction is our top priority!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section id="services" class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;">Our Services</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <h3>Same-Day Delivery</h3>
+                    <p>Get your parcels delivered within hours in major cities. Fast, reliable, and secure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-truck"></i></div>
+                    <h3>Nationwide Courier</h3>
+                    <p>Door-to-door delivery across South Africa, from Cape Town to Limpopo and everywhere in between.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-box-open"></i></div>
+                    <h3>Business Solutions</h3>
+                    <p>Bulk shipping, scheduled pickups, and custom logistics for e-commerce and enterprises.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BOOKING SECTION ===== -->
+    <section id="book-now" class="booking-section">
+        <div class="container">
+            <div class="form-title">
+                <h2>Book a Courier</h2>
+                <p>Fill in your details and get a quote instantly.</p>
+            </div>
+            <form id="booking-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sender-name">Your Name</label>
+                        <input type="text" id="sender-name" name="sender-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sender-phone">Phone Number</label>
+                        <input type="tel" id="sender-phone" name="sender-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup-address">Pickup Address</label>
+                        <input type="text" id="pickup-address" name="pickup-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery-address">Delivery Address</label>
+                        <input type="text" id="delivery-address" name="delivery-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="parcel-size">Parcel Size</label>
+                        <select id="parcel-size" name="parcel-size" required>
+                            <option value="">Select size</option>
+                            <option value="small">Small (up to 2kg)</option>
+                            <option value="medium">Medium (2-10kg)</option>
+                            <option value="large">Large (10kg+)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Service Type</label>
+                        <select id="service-type" name="service-type" required>
+                            <option value="">Select service</option>
+                            <option value="same-day">Same-Day</option>
+                            <option value="overnight">Overnight</option>
+                            <option value="economy">Economy</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:20px;">
+                    <button type="submit" class="btn btn-primary">Get Quote</button>
+                </div>
+            </form>
+            <div class="calculator-result" id="quote-result" style="display:none;">
+                <div class="rate-amount" id="rate-amount">R0.00</div>
+                <button id="pay-with-yoco" class="btn btn-secondary">Pay Now</button>
+                <div id="yoco-status" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRACKING SECTION ===== -->
+    <section id="tracking" class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;">Track Your Parcel</h2>
+            <form id="tracking-form" style="max-width:400px;margin:0 auto;">
+                <div class="form-group">
+                    <label for="tracking-number">Tracking Number</label>
+                    <input type="text" id="tracking-number" name="tracking-number" required>
+                </div>
+                <div style="text-align:center;">
+                    <button type="submit" class="btn btn-primary">Track</button>
+                </div>
+            </form>
+            <div id="tracking-result" style="text-align:center;margin-top:20px;"></div>
+        </div>
+    </section>
+
+    <!-- ===== LOCAL SERVICES SECTION ===== -->
+    <section id="local-services" class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;">Local Delivery Rates</h2>
+            <table class="local-services-table">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Same-Day</th>
+                        <th>Overnight</th>
+                        <th>Economy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Johannesburg</td>
+                        <td>R80</td>
+                        <td>R60</td>
+                        <td>R40</td>
+                    </tr>
+                    <tr>
+                        <td>Cape Town</td>
+                        <td>R90</td>
+                        <td>R70</td>
+                        <td>R50</td>
+                    </tr>
+                    <tr>
+                        <td>Durban</td>
+                        <td>R85</td>
+                        <td>R65</td>
+                        <td>R45</td>
+                    </tr>
+                    <tr>
+                        <td>Pretoria</td>
+                        <td>R80</td>
+                        <td>R60</td>
+                        <td>R40</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Super fast and friendly service! My package arrived the same day. Highly recommended.</p>
+                    <div class="testimonial-author">Lindiwe M.</div>
+                    <div class="testimonial-role">Small Business Owner</div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Affordable rates and great customer support. I use Taurus Couriers for all my deliveries.</p>
+                    <div class="testimonial-author">Sipho N.</div>
+                    <div class="testimonial-role">Online Seller</div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Easy booking and real-time tracking. I always know where my parcel is!</p>
+                    <div class="testimonial-author">Thandi D.</div>
+                    <div class="testimonial-role">Student</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section id="faq" class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;">Frequently Asked Questions</h2>
+            <div class="about-cards">
+                <div class="about-card">
+                    <h3>How do I book a courier?</h3>
+                    <p>Use our online booking form above or call us directly. We'll handle the rest!</p>
+                </div>
+                <div class="about-card">
+                    <h3>Can I track my parcel?</h3>
+                    <p>Yes, enter your tracking number in the tracking section to see real-time updates.</p>
+                </div>
+                <div class="about-card">
+                    <h3>What areas do you cover?</h3>
+                    <p>We deliver nationwide, including all major cities and towns in South Africa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact" class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;">Contact Us</h2>
+            <form id="contact-form" style="max-width:500px;margin:0 auto;">
+                <div class="form-group">
+                    <label for="contact-name">Your Name</label>
+                    <input type="text" id="contact-name" name="contact-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email</label>
+                    <input type="email" id="contact-email" name="contact-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="contact-message" rows="4" required></textarea>
+                </div>
+                <div style="text-align:center;">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+            </form>
+            <div id="contact-result" style="text-align:center;margin-top:20px;"></div>
+            <div style="text-align:center;margin-top:30px;">
+                <p><i class="fas fa-phone"></i> <a href="tel:+27655587885">+27 655 587885</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@tauruscouriers.co.za">info@tauruscouriers.co.za</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Johannesburg, South Africa</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-logo">
+                <img src="https://svgshare.com/i/15wC.svg" alt="Taurus Couriers Logo">
+                <p>Premium Courier Services</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#book-now">Book Now</a></li>
+                    <li><a href="#tracking">Track Parcel</a></li>
+                    <li><a href="#local-services">Rates</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#services">Same-Day Delivery</a></li>
+                    <li><a href="#services">Nationwide Courier</a></li>
+                    <li><a href="#services">Business Solutions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Taurus Couriers. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ===== Yoco SDK ===== -->
+    <script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Booking form quote logic (simple example)
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simple quote calculation
+            let size = document.getElementById('parcel-size').value;
+            let service = document.getElementById('service-type').value;
+            let price = 0;
+            if (service === 'same-day') price = size === 'small' ? 80 : size === 'medium' ? 120 : 180;
+            if (service === 'overnight') price = size === 'small' ? 60 : size === 'medium' ? 90 : 140;
+            if (service === 'economy') price = size === 'small' ? 40 : size === 'medium' ? 70 : 110;
+            document.getElementById('rate-amount').textContent = 'R' + price + '.00';
+            document.getElementById('quote-result').style.display = 'block';
+        });
+
+        // Yoco payment handler
+        document.getElementById('pay-with-yoco')?.addEventListener('click', function() {
+            const yoco = new window.YocoSDK({
+                publicKey: 'pk_test_12345678901234567890' // Replace with your real Yoco public key
+            });
+            yoco.showPopup({
+                amountInCents: parseInt(
+                    (parseFloat(document.getElementById('rate-amount').textContent.replace('R','')) * 100).toFixed(0)
+                ),
+                currency: 'ZAR',
+                name: 'Taurus Couriers',
+                description: 'Courier Booking Payment',
+                callback: function(result) {
+                    if (result.error) {
+                        document.getElementById('yoco-status').style.color = 'var(--danger)';
+                        document.getElementById('yoco-status').textContent = "Payment failed: " + result.error.message;
+                    } else {
+                        document.getElementById('yoco-status').style.color = 'var(--success)';
+                        document.getElementById('yoco-status').textContent = "Payment successful! Reference: " + result.id;
+                    }
+                }
+            });
+        });
+
+        // Tracking form (demo)
+        document.getElementById('tracking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let trackingNumber = document.getElementById('tracking-number').value.trim();
+            let resultDiv = document.getElementById('tracking-result');
+            // Demo: always returns "In Transit"
+            if(trackingNumber) {
+                resultDiv.textContent = "Status: In Transit (demo)";
+            } else {
+                resultDiv.textContent = "Please enter a valid tracking number.";
+            }
+        });
+
+        // Contact form (demo)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('contact-result').textContent = "Thank you for contacting us! We'll get back to you soon.";
+            document.getElementById('contact-form').reset();
+        });
+    </script>
+</body>
+</html>
